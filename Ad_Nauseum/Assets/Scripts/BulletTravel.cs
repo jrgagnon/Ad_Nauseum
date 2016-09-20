@@ -22,4 +22,13 @@ public class BulletTravel : MonoBehaviour {
 		Destroy (this.gameObject);
 	}
 
+	void OnTriggerEnter2D(Collider2D collide) {
+
+		if (collide.gameObject.CompareTag("EvilTrigger")) {
+			
+			Debug.Log ("Boom");
+		}
+
+	}
+
 }
