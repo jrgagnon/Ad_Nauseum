@@ -10,6 +10,17 @@ public class BulletEnemyBoom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 	
+	}
+
+	void OnTriggerEnter2D(Collider2D collide) {
+
+		if (collide.gameObject.CompareTag("EvilTrigger")) {
+
+			Debug.Log ("Boom");
+		}
+
 	}
 }
