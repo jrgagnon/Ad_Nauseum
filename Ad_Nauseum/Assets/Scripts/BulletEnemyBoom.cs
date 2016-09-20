@@ -20,6 +20,8 @@ public class BulletEnemyBoom : MonoBehaviour {
 		if (collide.gameObject.CompareTag("EvilTrigger")) {
 
 			Debug.Log ("Boom");
+
+			Destroy (this.gameObject);
 		}
 
 	}
