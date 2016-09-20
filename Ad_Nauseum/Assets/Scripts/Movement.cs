@@ -18,18 +18,17 @@ public class Movement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		float movement = 0;
+		float movement = 0;                                                                                                                        
 		
 		if (Input.GetAxisRaw ("Horizontal") > 0) {
 			movement += speed * Time.deltaTime;
-
+			transform.localScale = new Vector2 (1, 1);
 		}
 
 		if (Input.GetAxisRaw ("Horizontal") < 0) {
 			movement += -speed * Time.deltaTime;
+			transform.localScale = new Vector2 (-1, 1);
 		}
-
-
 	
 		body.position = new Vector2(body.position.x + movement, body.position.y);
 

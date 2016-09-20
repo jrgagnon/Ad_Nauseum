@@ -21,7 +21,9 @@ public class DeathCollsion : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		
 		//Checks the other object's tag: if it's the tag we're looking for, continue
-		if (other.gameObject.CompareTag("EvilTrigger")) {
+		if (other.gameObject.CompareTag ("EvilTrigger")) {
+			gameObject.SetActive (false);
+		} else if (other.gameObject.CompareTag ("Enemy")) {
 			gameObject.SetActive (false);
 		}
 	}
