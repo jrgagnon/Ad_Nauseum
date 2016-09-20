@@ -16,5 +16,10 @@ public class Shooting : MonoBehaviour {
 			Instantiate (bullet, self.position, Quaternion.identity);
 		}
 			
+
+	}
+
+	void OnBecameInvisible() {
+		enabled = false;
 	}
 }

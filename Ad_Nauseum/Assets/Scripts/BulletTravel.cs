@@ -14,4 +14,12 @@ public class BulletTravel : MonoBehaviour {
 	void Update () {
 		self.position = new Vector2(self.position.x + .64f, self.position.y);
 	}
+
+	void OnBecameInvisible() {
+
+		Debug.Log ("Hoopla");
+
+		Destroy (this.gameObject);
+	}
+
 }
