@@ -1,0 +1,8 @@
+.DS_store
+*.meta
+Ad_Nauseum/Library
+Ad_Nauseum/ProjectSettings
+Ad_Nauseum/Temp
+Ad_Nauseum/Ad_Nauseum.sln
+Ad_Nauseum/Ad_Nauseum.userprefs
+Ad_Nauseum/Assembly-CSharp.csproj

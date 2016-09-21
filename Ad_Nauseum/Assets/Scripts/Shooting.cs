@@ -17,6 +17,7 @@ public class Shooting : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Fire2")) {
 			Instantiate (bullet, new Vector2(self.position.x + bulletAdX, self.position.y + bulletAdY), Quaternion.identity);
+			GetComponent<Animator>().SetBool("shooting", true);
 		}
 			
 
