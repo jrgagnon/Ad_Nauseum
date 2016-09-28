@@ -22,6 +22,11 @@ public class BulletEnemyBoom : MonoBehaviour {
 			Debug.Log ("Boom");
 
 			Destroy (this.gameObject);
+		} else if (collide.gameObject.CompareTag("Enemy")){
+
+			Debug.Log ("Dead");
+
+			Destroy (this.gameObject);
 		}
 
 	}
