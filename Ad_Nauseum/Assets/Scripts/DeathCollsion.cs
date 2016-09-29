@@ -3,13 +3,10 @@ using System.Collections;
 
 public class DeathCollsion : MonoBehaviour {
 
-	//For the player's own collider
-	private BoxCollider2D self;
 
 	// Use this for initialization
 	void Start () {
-		//Find the player's own collider
-		self = GetComponent<BoxCollider2D> ();
+		
 	}
 	
 	// Update is called once per frame
@@ -18,13 +15,14 @@ public class DeathCollsion : MonoBehaviour {
 	}
 
 	//Called when the player collides with another trigger
-	void OnTriggerEnter2D(Collider2D other) {
-		
+	void OnTriggerEnter2D(Collider2D other) {		
 		//Checks the other object's tag: if it's the tag we're looking for, continue
+		//NOTE: Application is deprecated. Find out how to use scenemanager
 		if (other.gameObject.CompareTag ("EvilTrigger")) {
-			gameObject.SetActive (false);
+			Application.LoadLevel(Application.loadedLevel);
 		} else if (other.gameObject.CompareTag ("Enemy")) {
-			gameObject.SetActive (false);
+			//Application.LoadLevel (Application.loadedLevel);
+			Application.LoadLevel(Application.loadedLevel);
 		}
 	}
 }

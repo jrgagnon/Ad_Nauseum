@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour {
 	Rigidbody2D body;
 	public float speed;
 	public float jumpSpeed;
+	public bool turn;
 
 	private bool airborne;
 
@@ -23,11 +24,13 @@ public class Movement : MonoBehaviour {
 		if (Input.GetAxisRaw ("Horizontal") > 0) {
 			movement += speed * Time.deltaTime;
 			transform.localScale = new Vector2 (1, 1);
+			turn = false;
 		}
 
 		if (Input.GetAxisRaw ("Horizontal") < 0) {
 			movement += -speed * Time.deltaTime;
 			transform.localScale = new Vector2 (-1, 1);
+			turn = true;
 		}
 	
 		body.position = new Vector2(body.position.x + movement, body.position.y);
