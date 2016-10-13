@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BulletTravel : MonoBehaviour {
@@ -22,6 +23,7 @@ public class BulletTravel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		self.position = new Vector2(self.position.x + speed, self.position.y);
+
 	}
 
 	void OnBecameInvisible() {
@@ -40,6 +42,7 @@ public class BulletTravel : MonoBehaviour {
 		if (collide.gameObject.CompareTag ("Enemy")) {
 			GameObject.Destroy (collide.gameObject);
 			GameObject.Destroy (self.gameObject);
+			GlobalVars.score += 10;
 		}
 
 	}
