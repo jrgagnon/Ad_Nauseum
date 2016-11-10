@@ -28,7 +28,7 @@ public class BulletTravel : MonoBehaviour {
 
 	void OnBecameInvisible() {
 
-		Debug.Log ("Hoopla");
+		//Debug.Log ("Hoopla");
 
 		Destroy (this.gameObject);
 	}

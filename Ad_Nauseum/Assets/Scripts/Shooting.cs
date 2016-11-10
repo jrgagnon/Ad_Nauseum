@@ -24,12 +24,12 @@ public class Shooting : MonoBehaviour {
 			Instantiate (bullet, new Vector2(self.position.x + bulletAdX, self.position.y + bulletAdY), Quaternion.identity);
 
 			//animator.SetTrigger ("shooting");
-			animator.SetBool("shooting", true);
+			//animator.SetBool("shooting", true);
 			shootPause = 1f;
 
 		}
 		if (shootPause <= 0) {
-			animator.SetBool ("shooting", false);
+			//animator.SetBool ("shooting", false);
 		} else {
 			shootPause -= 1 * Time.deltaTime;
 		}
