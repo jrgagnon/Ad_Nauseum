@@ -8,6 +8,9 @@ public class HealthMonitor : MonoBehaviour
     public int HP = 3;
     public int MaxHP = 5;
 
+    protected float last_time = -1f;
+    protected float fire_threshold = 0.045f;
+
     public bool DEBUG_Bleedout_on = false;
 
     public GameObject Player;
@@ -59,9 +62,29 @@ public class HealthMonitor : MonoBehaviour
             this.HP -= 1;
             //Debug.Log("[i] Bleeding... -1 -> "+this.HP);
         }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            this.last_time = Time.time;
+        } else if(Input.GetButtonUp("Fire2") && this.last_time > Time.time) {
+            if (this.last_time > Time.time + fire_threshold)
+            {
+                // Charged
+                //@@@FireCodeHere
+                float amt = (Time.time - this.last_time);
+
+            }
+            else
+            {
+                // Too quick, lesser
+                //@@@FireCodeHere
+
+            }
+            this.last_time = -1f;
+        }
+        
     }
 
-    public bool IsAlive
+    public bool IsAlive 
     { // Attribute
         get { return this.HP > 0; }
     }
