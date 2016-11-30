@@ -10,8 +10,14 @@ public class DeathCollsion : MonoBehaviour {
 	public float blinkTime;
 	private float blinkClock;
 
+	//Death Sound
+	public AudioClip deathSound;
+
+	private AudioSource audioSource;
+
 	// Use this for initialization
 	void Start () {
+		audioSource = GetComponent<AudioSource> ();
 		itimer = 0;
 		blinkClock = 0;
 	}
@@ -39,6 +45,7 @@ public class DeathCollsion : MonoBehaviour {
 				//GlobalVars.playerHealth -= 1;
 				//itimer = isecs;
 				//if (GlobalVars.playerHealth <= 0) {
+				audioSource.PlayOneShot(deathSound, 1F);
 				Application.LoadLevel (Application.loadedLevel);
 				HealthMonitor.HP = HealthMonitor.MaxHP;
 				//}
@@ -47,8 +54,9 @@ public class DeathCollsion : MonoBehaviour {
 				HealthMonitor.HP -= 20;
 				itimer = isecs;
 				Movement.stagger = true;
-				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
-				if (HealthMonitor.HP <= 0) {
+				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D>().position.x - other.attachedRigidbody.position.x);
+				if (GlobalVars.playerHealth <= 0) {
+					audioSource.PlayOneShot(deathSound, 1F);
 					Application.LoadLevel (Application.loadedLevel);
 					HealthMonitor.HP = HealthMonitor.MaxHP;
 				}
