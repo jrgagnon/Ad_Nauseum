@@ -31,17 +31,4 @@ public class BulletTravel : MonoBehaviour {
 		Destroy (this.gameObject);
 	}
 
-	void OnTriggerEnter2D(Collider2D collide) {
-
-		/*if (collide.gameObject.CompareTag ("EvilTrigger")) {
-			GameObject.Destroy (collide.gameObject);
-			Debug.Log ("Boom");
-		} else */
-		if (collide.gameObject.CompareTag ("Enemy")) {
-			GameObject.Destroy (collide.gameObject);
-			GameObject.Destroy (self.gameObject);
-		}
-
-	}
-
 }
