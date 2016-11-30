@@ -62,26 +62,6 @@ public class HealthMonitor : MonoBehaviour
             this.HP -= 1;
             //Debug.Log("[i] Bleeding... -1 -> "+this.HP);
         }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            this.last_time = Time.time;
-        } else if(Input.GetButtonUp("Fire2") && this.last_time > Time.time) {
-            if (this.last_time > Time.time + fire_threshold)
-            {
-                // Charged
-                //@@@FireCodeHere
-                float amt = (Time.time - this.last_time);
-
-            }
-            else
-            {
-                // Too quick, lesser
-                //@@@FireCodeHere
-
-            }
-            this.last_time = -1f;
-        }
-        
     }
 
     public bool IsAlive 
