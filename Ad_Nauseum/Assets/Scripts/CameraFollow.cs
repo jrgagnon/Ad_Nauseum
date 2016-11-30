@@ -11,16 +11,20 @@ public class CameraFollow : MonoBehaviour
     Vector3 position;
     protected new Camera camera;
     public int top = 30;
-    public int bottom = 0;
+    public int bottom = -10;
+
+	public float centerMod = .2f;
+	private float posMod;
     // Use this for initialization
     void Start()
     {
         camera = GetComponent<Camera>();
         this.follow = GameObject.Find("Player");
+		posMod = 1;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
 
 
@@ -32,12 +36,20 @@ public class CameraFollow : MonoBehaviour
         {
             position.y = top - camera.orthographicSize;
         }
-        else
-                if (position.y - camera.orthographicSize < bottom)
+        else if (position.y - camera.orthographicSize < bottom)
         {
             position.y = bottom + camera.orthographicSize;
         }
-        position.x = follow.transform.position.x + (.9F * (camera.orthographicSize * camera.aspect));
+
+		if (Movement.turn) {
+			posMod = -1;
+		} else {
+			posMod = 1;
+		}
+
+
+		position.x = follow.transform.position.x + (posMod * centerMod * (camera.orthographicSize * camera.aspect));
+		position.x = Mathf.Lerp (this.transform.position.x, position.x, followSpeed * Time.fixedDeltaTime);
         this.transform.position = position;
     }
 }

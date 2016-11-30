@@ -40,17 +40,26 @@ public class DeathCollsion : MonoBehaviour {
 				//itimer = isecs;
 				//if (GlobalVars.playerHealth <= 0) {
 				Application.LoadLevel (Application.loadedLevel);
-				GlobalVars.playerHealth = 100;
+				HealthMonitor.HP = HealthMonitor.MaxHP;
 				//}
 			} else if (other.gameObject.CompareTag ("Enemy")) {
 				// Need to add code to freeze enemy for a moment after the player hits it, to make damage less frustrating
-				GlobalVars.playerHealth -= 20;
+				HealthMonitor.HP -= 20;
 				itimer = isecs;
 				Movement.stagger = true;
-				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D>().position.x - other.attachedRigidbody.position.x);
-				if (GlobalVars.playerHealth <= 0) {
+				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
+				if (HealthMonitor.HP <= 0) {
 					Application.LoadLevel (Application.loadedLevel);
-					GlobalVars.playerHealth = 100;
+					HealthMonitor.HP = HealthMonitor.MaxHP;
+				}
+			} else if (other.gameObject.CompareTag ("EnemyBullet")) {
+				HealthMonitor.HP -= 15;
+				itimer = isecs;
+				Movement.stagger = true;
+				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
+				if (HealthMonitor.HP <= 0) {
+					Application.LoadLevel (Application.loadedLevel);
+					HealthMonitor.HP = HealthMonitor.MaxHP;
 				}
 			}
 		}

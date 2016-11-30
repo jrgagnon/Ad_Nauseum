@@ -5,8 +5,8 @@ using System.Collections;
 public class HealthMonitor : MonoBehaviour
 {
 
-    public int HP = 3;
-    public int MaxHP = 5;
+    public static int HP = 100;
+    public static int MaxHP = 100;
 
     protected float last_time = -1f;
     protected float fire_threshold = 0.045f;
@@ -25,7 +25,7 @@ public class HealthMonitor : MonoBehaviour
         {
             // If the starting HP is not set, set as total
             // So people dont die RIGHT at start
-            this.HP += this.MaxHP;
+           HP += MaxHP;
 
             if (Player == null)
             {
@@ -59,7 +59,7 @@ public class HealthMonitor : MonoBehaviour
         // Fixed interval regen will be handled here
         if (DEBUG_Bleedout_on == true)
         {
-            this.HP -= 1;
+            HP -= 1;
             //Debug.Log("[i] Bleeding... -1 -> "+this.HP);
         }
         if (Input.GetButtonDown("Fire2"))
@@ -86,7 +86,7 @@ public class HealthMonitor : MonoBehaviour
 
     public bool IsAlive 
     { // Attribute
-        get { return this.HP > 0; }
+        get { return HP > 0; }
     }
     public bool IsDead
     {
@@ -97,7 +97,7 @@ public class HealthMonitor : MonoBehaviour
     {
 
         // You will notice, the damage is added...
-        this.HP -= dmg;
+        HP -= dmg;
 
         // Check to make sure we didnt just die lol
 

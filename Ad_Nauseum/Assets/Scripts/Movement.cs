@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour {
 	Rigidbody2D body;
 	public float speed;
 	public float jumpSpeed;
-	public bool turn;
+	public static bool turn;
 
 	public static bool stagger = false;
 	public static float staggerdir = 1;
