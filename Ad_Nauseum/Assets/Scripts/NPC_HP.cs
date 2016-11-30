@@ -40,7 +40,7 @@ public class NPC_HP : MonoBehaviour {
 
     void Damage(int amt)
     {
-        this.Current_HP -= amt
+        this.Current_HP -= amt;
         
         //@@@ Damage Sound here!
         if (isDead())
