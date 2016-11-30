@@ -7,7 +7,7 @@ public class NPC_HP : MonoBehaviour {
     public GameObject NPC;
     public int Total_HP = 3;
     public bool IsBleeding = false;
-    protected int Current_HP;
+    protected int Current_HP = 1;
 
 	// Use this for initialization
 	void Start () {
