@@ -9,10 +9,9 @@ public class Shooting : MonoBehaviour {
 	private Rigidbody2D self;
 	private float shootPause;
 
-    public float Max_Hold_Time = 10.5f;
-
-    private float last_time = -1f;
-    private float fire_threshold = 0.045f;
+    public float Max_Hold_Time      = 10.5f;
+    private float last_time         = -1f;
+    private float fire_threshold    = 0.045f;
 
     private Animator animator;
 
@@ -56,7 +55,7 @@ public class Shooting : MonoBehaviour {
 		}
 	}
 
-    void Fire(float extra){
+    public void Fire(float extra){
         
         int add = Mathf.RoundToInt( Mathf.Clamp(extra, 0f, Max_Hold_Time) );
         // @@@ Modify bullet here
@@ -67,7 +66,5 @@ public class Shooting : MonoBehaviour {
         //animator.SetBool("shooting", true);
         shootPause = 1f;
     }
-
-
 
 }
