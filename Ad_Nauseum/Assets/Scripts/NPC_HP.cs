@@ -23,22 +23,22 @@ public class NPC_HP : MonoBehaviour {
         this.Damage(-1);
 	}
 
-    bool isDead()
+    public bool isDead()
     {
         return !isAlive();
     }
 
-    bool isAlive()
+    public bool isAlive()
     {
         return this.Current_HP > 0;
     }
 
-    void Damage(float amt)
+    public void Damage(float amt)
     {
         Damage(Mathf.Round(amt));
     }
 
-    void Damage(int amt)
+    public void Damage(int amt)
     {
         this.Current_HP -= amt;
         
@@ -49,7 +49,7 @@ public class NPC_HP : MonoBehaviour {
         }
     }
 
-    void Death()
+    public void Death()
     {
         // Death Sound
         GameObject.Destroy(this.NPC);

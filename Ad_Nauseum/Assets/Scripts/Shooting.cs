@@ -58,10 +58,11 @@ public class Shooting : MonoBehaviour {
 
     void Fire(float extra){
         
-        extra = Mathf.Clamp(extra, 0f, Max_Hold_Time);
-// @@@ Modify bullet here
+        int add = Mathf.RoundToInt( Mathf.Clamp(extra, 0f, Max_Hold_Time) );
+        // @@@ Modify bullet here
+        this.bullet.GetComponent<BulletEnemyBoom>().dmg = 1 + add;
         Instantiate(bullet, new Vector2(self.position.x + bulletAdX, self.position.y + bulletAdY), Quaternion.identity);
-
+        
         //animator.SetTrigger ("shooting");
         //animator.SetBool("shooting", true);
         shootPause = 1f;

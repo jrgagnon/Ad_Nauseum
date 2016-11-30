@@ -3,15 +3,9 @@ using System.Collections;
 
 public class BulletEnemyBoom : MonoBehaviour {
 
+    public int dmg = 1;
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-
 	
 	}
 
@@ -24,9 +18,8 @@ public class BulletEnemyBoom : MonoBehaviour {
 			Destroy (this.gameObject);
 		} else if (collide.gameObject.CompareTag("Enemy")){
 
-			Debug.Log ("Dead");
-
-			Destroy (this.gameObject);
+			Debug.Log ("NPC HIT");
+            collide.gameObject.GetComponent<NPC_HP>().Damage(dmg);
 		}
 
 	}
