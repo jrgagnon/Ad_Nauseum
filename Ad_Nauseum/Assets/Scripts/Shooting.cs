@@ -9,11 +9,15 @@ public class Shooting : MonoBehaviour {
 	private Rigidbody2D self;
 	private float shootPause;
 
+	public AudioClip shootSound;
+
 	private Animator animator;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
 		self = GetComponent<Rigidbody2D> ();
+		audioSource = GetComponent<AudioSource> ();
 		animator = GetComponent<Animator> ();
 		shootPause = 0;
 	}
@@ -21,6 +25,9 @@ public class Shooting : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown ("Fire2")) {
+
+			audioSource.PlayOneShot (shootSound, 1F);
+
 			Instantiate (bullet, new Vector2(self.position.x + bulletAdX, self.position.y + bulletAdY), Quaternion.identity);
 
 			//animator.SetTrigger ("shooting");
