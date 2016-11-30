@@ -17,16 +17,18 @@ public class BulletEnemyBoom : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collide) {
 
-		if (collide.gameObject.CompareTag("EvilTrigger")) {
+		if (collide.gameObject.CompareTag ("EvilTrigger")) {
 
 			Debug.Log ("Boom");
 
 			Destroy (this.gameObject);
-		} else if (collide.gameObject.CompareTag("Enemy")){
+		} else if (collide.gameObject.CompareTag ("Enemy")) {
 
 			Debug.Log ("Dead");
 
 			Destroy (this.gameObject);
+		} else {
+			//Hits nothing
 		}
 
 	}
