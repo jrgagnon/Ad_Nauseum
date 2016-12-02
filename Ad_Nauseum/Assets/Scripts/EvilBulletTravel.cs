@@ -34,6 +34,10 @@ public class EvilBulletTravel : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collide) {
 
+		if (collide.gameObject.CompareTag ("Wall")){
+			Destroy (this.gameObject);
+		}
+
 		/*if (collide.gameObject.CompareTag ("EvilTrigger")) {
 			GameObject.Destroy (collide.gameObject);
 			Debug.Log ("Boom");

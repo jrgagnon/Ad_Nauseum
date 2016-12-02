@@ -11,8 +11,14 @@ public class EnemyDrops : MonoBehaviour {
 
 	// The rates of all of the drops.
 	// Whenever you add a new drop, make sure you update the start function
+	public float enemyHealth;
 	public float smallHealthRate;
+	public float trophyRate;
 	public GameObject smallHealth;
+	public GameObject trophy;
+
+	public AudioClip hitSound;
+	private AudioSource audioSource;
 
 	/* This program will use ints corresponding to the following list.
 	 * If you add a new drop, make sure to update this list. I'm sure there's
@@ -32,6 +38,11 @@ public class EnemyDrops : MonoBehaviour {
 		if (prob <= 0 && itemDropped == 0) {
 			itemDropped = 1;
 		}
+		prob -= trophyRate;
+		if (prob <= 0 && itemDropped == 0) {
+			itemDropped = 2;
+		}
+		audioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -39,10 +50,44 @@ public class EnemyDrops : MonoBehaviour {
 		
 	}
 
-	void OnDisable(){
+	/*void OnDisable(){
 		if (itemDropped == 1) {
 			// Make a small health pack, put it here
 			Instantiate(smallHealth, GetComponent<Rigidbody2D>().transform.position, Quaternion.identity);
 		}
+	}*/
+
+
+	// Putting this here because I don't have time
+	void OnTriggerEnter2D(Collider2D collide) {
+
+		if (collide.gameObject.CompareTag ("PlayerBullet")) {
+			audioSource.PlayOneShot(hitSound, .4F);
+			enemyHealth -= 1;
+			if (GlobalVars.bulletPowerUp) {
+				enemyHealth -= 1;
+			}
+			GameObject.Destroy (collide.gameObject);
+		} else if (collide.gameObject.CompareTag ("PlayerBulletCharged")) {
+			audioSource.PlayOneShot(hitSound, .7F);
+			enemyHealth -= 3;
+			if (GlobalVars.bulletPowerUp) {
+				enemyHealth -= 3;
+			}
+			GameObject.Destroy (collide.gameObject);
+		}
+
+		if (enemyHealth <= 0) {
+			
+			GameObject.Destroy (this.gameObject);
+			GlobalVars.score += 10;
+			if (itemDropped == 1) {
+				// Make a small health pack, put it here
+				Instantiate (smallHealth, GetComponent<Rigidbody2D> ().transform.position, Quaternion.identity);
+			} else if (itemDropped == 2) {
+				Instantiate (trophy, new Vector2 (95.81f, -8.71f), Quaternion.identity);
+			}
+		}
+
 	}
 }

@@ -113,8 +113,8 @@ public class HealthMonitor : MonoBehaviour
 
         }
     }
-
-    void OnCollisionExit2D(Collider coll)
+	/*
+    void OnCollisionExit2D(Collider2D coll)
     {
         bool IsEnemy = coll.gameObject.tag == "Enemy";
         bool IsItem = coll.gameObject.tag == "Item";
@@ -125,7 +125,6 @@ public class HealthMonitor : MonoBehaviour
             // Because you cant just take damage on ground
             Debug.Log("Off ground");
         }
-    }
+    }*/
 // END OF FILE
 }
-// Nothing

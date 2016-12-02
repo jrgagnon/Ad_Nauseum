@@ -11,7 +11,7 @@ public class BulletTravel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		speed = .1f;
+		speed = .2f;
 		self = GetComponent<Rigidbody2D> ();
 		player = GameObject.Find ("Player");
 		if (player.transform.localScale.x == -1) {
@@ -35,15 +35,20 @@ public class BulletTravel : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collide) {
 
+		if (collide.gameObject.CompareTag ("Wall") || collide.gameObject.CompareTag ("BrokenWall")){
+			Destroy (this.gameObject);
+		}
+
 		/*if (collide.gameObject.CompareTag ("EvilTrigger")) {
 			GameObject.Destroy (collide.gameObject);
 			Debug.Log ("Boom");
 		} else */
-		if (collide.gameObject.CompareTag ("Enemy")) {
+		/*if (collide.gameObject.CompareTag ("Enemy")) {
+			
 			GameObject.Destroy (collide.gameObject);
 			GameObject.Destroy (self.gameObject);
 			GlobalVars.score += 10;
-		}
+		}*/
 
 	}
 

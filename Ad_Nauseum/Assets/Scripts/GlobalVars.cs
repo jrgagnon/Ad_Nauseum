@@ -5,6 +5,8 @@ public class GlobalVars : MonoBehaviour {
 
 	public static int score = 0;
 	public static int playerHealth = 100;
+	public static bool levelBossActive = false;
+	public static bool bulletPowerUp = false;
 
 	// Use this for initialization
 	void Start () {
@@ -13,5 +15,12 @@ public class GlobalVars : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	public static void Reset () {
+		score = 0;
+		playerHealth = 100;
+		levelBossActive = false;
+		bulletPowerUp = false;
 	}
 }

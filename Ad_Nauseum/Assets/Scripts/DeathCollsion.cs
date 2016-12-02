@@ -10,8 +10,12 @@ public class DeathCollsion : MonoBehaviour {
 	public float blinkTime;
 	private float blinkClock;
 
+	public GameObject deadPlayer;
+
 	//Death Sound
 	public AudioClip deathSound;
+	public AudioClip shootSound;
+	public AudioClip hitSound;
 
 	private AudioSource audioSource;
 
@@ -45,31 +49,79 @@ public class DeathCollsion : MonoBehaviour {
 				//GlobalVars.playerHealth -= 1;
 				//itimer = isecs;
 				//if (GlobalVars.playerHealth <= 0) {
-				audioSource.PlayOneShot(deathSound, 1F);
-				Application.LoadLevel (Application.loadedLevel);
-				HealthMonitor.HP = HealthMonitor.MaxHP;
-				//}
+				audioSource.PlayOneShot(hitSound, .8F);
+				HealthMonitor.HP -= 35;
+				itimer = isecs;
+				Movement.stagger = true;
+				Movement.staggerdir = -1;
+
+				if (HealthMonitor.HP <= 0) {
+					audioSource.PlayOneShot (deathSound, 1F);
+					//HealthMonitor.HP = HealthMonitor.MaxHP;
+					Instantiate (deadPlayer, this.gameObject.transform.position, Quaternion.identity);
+					Destroy (this.gameObject);
+					//SceneManager.LoadScene ("Demo_Level");
+				}
 			} else if (other.gameObject.CompareTag ("Enemy")) {
 				// Need to add code to freeze enemy for a moment after the player hits it, to make damage less frustrating
+				audioSource.PlayOneShot(hitSound, .8F);
 				HealthMonitor.HP -= 20;
 				itimer = isecs;
 				Movement.stagger = true;
-				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D>().position.x - other.attachedRigidbody.position.x);
-				if (GlobalVars.playerHealth <= 0) {
-					audioSource.PlayOneShot(deathSound, 1F);
-					Application.LoadLevel (Application.loadedLevel);
-					HealthMonitor.HP = HealthMonitor.MaxHP;
+				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
+				if (HealthMonitor.HP <= 0) {
+					audioSource.PlayOneShot (deathSound, 1F);
+					//HealthMonitor.HP = HealthMonitor.MaxHP;
+					Instantiate (deadPlayer, this.gameObject.transform.position, Quaternion.identity);
+					this.gameObject.SetActive (false);
+					//SceneManager.LoadScene ("Demo_Level");
 				}
 			} else if (other.gameObject.CompareTag ("EnemyBullet")) {
+				audioSource.PlayOneShot(hitSound, .6F);
 				HealthMonitor.HP -= 15;
 				itimer = isecs;
 				Movement.stagger = true;
 				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
 				if (HealthMonitor.HP <= 0) {
-					Application.LoadLevel (Application.loadedLevel);
-					HealthMonitor.HP = HealthMonitor.MaxHP;
+					audioSource.PlayOneShot (deathSound, 1F);
+					//HealthMonitor.HP = HealthMonitor.MaxHP;
+					Instantiate (deadPlayer, this.gameObject.transform.position, Quaternion.identity);
+					Destroy (this.gameObject);
+					//SceneManager.LoadScene ("Demo_Level");
 				}
+				Destroy (other.gameObject);
+			} else if (other.gameObject.CompareTag ("FallingRock")){
+				audioSource.PlayOneShot(hitSound, .6F);
+				HealthMonitor.HP -= 35;
+				itimer = isecs;
+				Movement.stagger = true;
+				Movement.staggerdir = Mathf.Sign (GetComponent<Rigidbody2D> ().position.x - other.attachedRigidbody.position.x);
+				if (HealthMonitor.HP <= 0) {
+					audioSource.PlayOneShot (deathSound, 1F);
+					//HealthMonitor.HP = HealthMonitor.MaxHP;
+					Instantiate (deadPlayer, this.gameObject.transform.position, Quaternion.identity);
+					Destroy (this.gameObject);
+					//SceneManager.LoadScene ("Demo_Level");
+				}
+				Destroy (other.gameObject);
 			}
+		}
+
+		if (other.gameObject.CompareTag ("SmallHealthPickup")) {
+			HealthMonitor.HP += 20;
+			audioSource.PlayOneShot (shootSound, .3F);
+			if (HealthMonitor.HP >= HealthMonitor.MaxHP) {
+				HealthMonitor.HP = HealthMonitor.MaxHP;
+			}
+			Destroy (other.gameObject);
+		} else if (other.gameObject.CompareTag ("BulletPowerUp")) {
+			GlobalVars.bulletPowerUp = true;
+			audioSource.PlayOneShot (shootSound, .4F);
+			Destroy (other.gameObject);
+		} else if (other.gameObject.CompareTag ("EndLevel")) {
+			GlobalVars.Reset ();
+			HealthMonitor.HP = HealthMonitor.MaxHP;
+			SceneManager.LoadScene ("EndScreen");
 		}
 	}
 }

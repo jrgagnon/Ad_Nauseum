@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour {
 	private float staggerClock;
 	public float staggerSpeed;
 
-	private bool airborne;
+	public bool airborne;
 
 	// Use this for initialization
 	void Start () {
@@ -25,33 +25,34 @@ public class Movement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		float movement = 0;                                                                                                                        
 
 		// If hit, player will stagger backwards away from enemy
 		if (stagger) {
-			movement += ((staggerSpeed) * Time.deltaTime) * staggerdir;
-			staggerClock += Time.deltaTime;
+			movement += ((staggerSpeed) * Time.fixedDeltaTime) * staggerdir;
+			staggerClock += Time.fixedDeltaTime;
 			if (staggerClock >= staggerTime) {
 				stagger = false;
 				staggerClock = 0;
 			}
 		} else {
 			if (Input.GetAxisRaw ("Horizontal") > 0) {
-				movement += speed * Time.deltaTime;
-				transform.localScale = new Vector2 (1, 1);
+				movement += speed * Time.fixedDeltaTime;
+				//transform.localScale = new Vector2 (1, 1);
 				turn = false;
 			}
 
 			if (Input.GetAxisRaw ("Horizontal") < 0) {
-				movement += -speed * Time.deltaTime;
-				transform.localScale = new Vector2 (-1, 1);
+				movement += -speed * Time.fixedDeltaTime;
+				//transform.localScale = new Vector2 (-1, 1);
 				turn = true;
 			}
 		}
 	
-		body.position = new Vector2(body.position.x + movement, body.position.y);
+		body.position += new Vector2(/*body.position.x + */movement, 0 /*body.position.y*/);
+
 
 		if (airborne == true) {
 			if (body.velocity.y == 0) {
@@ -59,10 +60,16 @@ public class Movement : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonDown ("Fire1") && body.velocity.y == 0) {
+		if ((Input.GetButtonDown ("Fire1") || Input.GetButton ("Fire1")) && body.velocity.y == 0) {
 			body.AddForce (new Vector2 (0, jumpSpeed));
 			airborne = true;
 		}
 
 	}
+
+	//void OnCollisionEnter2D(Collision2D other){
+		//if (other.gameObject.CompareTag ("Wall") || other.gameObject.CompareTag ("BrokenWall") || other.gameObject.CompareTag ("EvilTrigger")) {
+		//	airborne = false;
+		//}
+	//}
 }
